@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bancairebackend" />
+        <module name="bancairefrontend" />
+        <module name="ibanbackend" />
+        <module name="ibanfrontend" />
+        <module name="waitingqueue" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bancairebackend" target="11" />
+      <module name="bancairefrontend" target="11" />
+      <module name="ibanbackend" target="11" />
+      <module name="ibanfrontend" target="11" />
+      <module name="waitingqueue" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bancairebackend" options="-parameters" />
+      <module name="bancairefrontend" options="-parameters" />
+      <module name="ibanbackend" options="-parameters" />
+      <module name="ibanfrontend" options="-parameters" />
+      <module name="waitingqueue" options="-parameters" />
+    </option>
+  </component>
+</project>
