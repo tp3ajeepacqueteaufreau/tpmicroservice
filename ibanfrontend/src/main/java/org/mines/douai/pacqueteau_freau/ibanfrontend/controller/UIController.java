@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UIController {
     
-    @GetMapping("/iban")
+    @GetMapping("/")
     public String getIban() {
         return "index.html";
     }

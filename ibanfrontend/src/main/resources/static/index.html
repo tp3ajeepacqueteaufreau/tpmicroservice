@@ -1,11 +1,96 @@
 <html>
 <head>
     <title>Service IBAN</title>
+    <script src="js/jq.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+
+            // SUBMIT FORM
+            $("#ibanForm").submit(function (event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                ajaxPost();
+            });
+
+
+            function ajaxPost() {
+
+                // PREPARE FORM DATA
+                var formData = {
+                    iban: $("#iban").val(),
+                }
+
+                console.log(JSON.stringify(formData));
+
+                // DO POST
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "http://localhost:8082/iban",
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.ok) {
+                            $("#postResultDiv").html("<p style='background-color:#7FFFB0; color:white; padding:20px 20px 20px 20px'>" +
+                                "IBAN is correct! <br>" +
+                                "IBAN = " +
+                                result.iban + "</p>");
+                        } else {
+                            $("#postResultDiv").html("<p style='background-color:#FF27B0; color:white; padding:20px 20px 20px 20px'>" +
+                                "IBAN is not correct! <br>" +
+                                "IBAN = " +
+                                result.iban + "</p>");
+                        }
+                        console.log(result);
+                    },
+                    error: function (e) {
+                        alert("Error!")
+                        console.log("ERROR: ", e);
+                    }
+                });
+
+                // Reset FormData after Posting
+                resetData();
+
+            }
+
+            function resetData() {
+                $("#firstname").val("");
+                $("#lastname").val("");
+            }
+        })
+
+
+    </script>
 </head>
 <body>
-<form>
-    <input name="iban" type="text"/>
+<form id="ibanForm" method="post">
+    <label name="ibanLabel">IBAN verifier</label>
+    <input id="iban" name="iban" type="text"/>
     <input type="submit"/>
 </form>
+<p id="postResultDiv"></p>
+
+<div>
+    <h1>IBAN Information!</h1>
+    <p>Regex: ^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?$</p>
+    <p>IBAN Valide</p>
+    <ul>
+        <li>AB12 1234 1234 1234 1234</li>
+        <li>AB12 1234 1234 1234 1234 1</li>
+        <li>AB12 1234 1234 1234 1234 12</li>
+        <li>AB123456789012345678</li>
+        <li>AB1234567890123456789</li>
+        <li>AB12345678901234567890</li>
+    </ul>
+    <p>IBAN Invalide</p>
+    <ul>
+        <li>AB12 1234 1234 1234 123 (to few numbers)</li>
+        <li>AB12 1234 1234 1234 1234 123 (to many numbers)</li>
+        <li>AB12 1234 1234 1234 1234 12</li>
+        <li>1234 1234 1234 1234 1234 (starts with numbers)</li>
+    </ul>
+</div>
+
 </body>
 </html>
