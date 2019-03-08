@@ -3,11 +3,12 @@ package org.mines.douai.pacqueteau_freau.bancairebackend.service;
 import org.mines.douai.pacqueteau_freau.bancairebackend.DTO.Account;
 import org.mines.douai.pacqueteau_freau.bancairebackend.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Component
+@Service
 public class AccountService {
     
     @Autowired
@@ -15,5 +16,14 @@ public class AccountService {
     
     public List<Account> getAllAccount() {
         return this.accountRepository.findAll();
+    }
+    
+    public Account getAnAccount(Long id) {
+        Optional<Account> account = this.accountRepository.findById(id);
+        return account.orElse(null);
+    }
+    
+    public Account createNewAccount(Account account) {
+        return this.accountRepository.save(account);
     }
 }

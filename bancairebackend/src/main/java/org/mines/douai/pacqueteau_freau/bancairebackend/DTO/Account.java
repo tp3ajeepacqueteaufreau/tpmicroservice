@@ -1,5 +1,7 @@
 package org.mines.douai.pacqueteau_freau.bancairebackend.DTO;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,6 +25,13 @@ public class Account {
     public Account() {
     }
     
+    public Account(AccountCreationRequest accountCreationRequest) {
+        this.iban = accountCreationRequest.getIban();
+        this.owner = accountCreationRequest.getOwner();
+        this.montant = accountCreationRequest.getMontant();
+    }
+    
+    @JsonCreator
     public Account(Long id, String owner, String iban, List<TransactionBancaire> transactions, float montant) {
         this.id = id;
         this.owner = owner;
