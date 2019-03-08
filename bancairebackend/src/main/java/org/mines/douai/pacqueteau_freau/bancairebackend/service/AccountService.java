@@ -26,4 +26,8 @@ public class AccountService {
     public Account createNewAccount(Account account) {
         return this.accountRepository.save(account);
     }
+    
+    public void deleteAccount(Long id) {
+        this.accountRepository.delete(this.accountRepository.findById(id));
+    }
 }

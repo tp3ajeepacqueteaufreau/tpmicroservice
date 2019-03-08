@@ -5,21 +5,22 @@ import org.mines.douai.pacqueteau_freau.bancairebackend.service.AccountService;
 import org.mines.douai.pacqueteau_freau.bancairebackend.service.IbanServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Component
 public class AccountController {
     
-    @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
+    
+    private final IbanServiceProxy ibanServiceProxy;
     
     @Autowired
-    private IbanServiceProxy ibanServiceProxy;
+    public AccountController(AccountService accountService, IbanServiceProxy ibanServiceProxy) {
+        this.accountService = accountService;
+        this.ibanServiceProxy = ibanServiceProxy;
+    }
     
     @GetMapping("/accounts")
     public List<Account> getAllAccount() {
@@ -50,4 +51,9 @@ public class AccountController {
         return null;
     }
     
+    @DeleteMapping("/account/{id}")
+    public boolean deleteAccount(@PathVariable("id") Long id) {
+        this.accountService.deleteAccount(id);
+        return true;
+    }
 }
