@@ -15,19 +15,21 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bancairebackend" target="11" />
-      <module name="bancairefrontend" target="11" />
+      <module name="bancairebackend" target="1.8" />
+      <module name="bancairefrontend" target="1.8" />
+      <module name="demo" target="1.8" />
       <module name="eureka" target="8" />
-      <module name="ibanbackend" target="11" />
-      <module name="ibanfrontend" target="11" />
+      <module name="ibanbackend" target="1.8" />
+      <module name="ibanfrontend" target="1.8" />
       <module name="spring-cloud-starter-openfeign" target="11" />
-      <module name="waitingqueue" target="11" />
+      <module name="waitingqueue" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bancairebackend" options="-parameters" />
       <module name="bancairefrontend" options="-parameters" />
+      <module name="demo" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="ibanbackend" options="-parameters" />
       <module name="ibanfrontend" options="-parameters" />

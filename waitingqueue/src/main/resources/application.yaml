@@ -3,15 +3,5 @@ server:
 
 spring:
   application:
-    name: waitting-queue
-
-eureka:
-  client:
-    fetchRegistry: true
-    registryFetchIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-  instance:
-    preferIpAddress: true
-
+    name: MyRabbitMQ
 

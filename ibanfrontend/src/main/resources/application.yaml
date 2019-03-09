@@ -1,0 +1,7 @@
+server:
+  port: 8081
+metier:
+  id: ibanfrontend
+spring:
+  application:
+    name: iban-frontend
