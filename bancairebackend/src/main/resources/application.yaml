@@ -4,4 +4,7 @@ server:
 spring:
   application:
     name: bancaire-backend
-
+  h2:
+    console:
+      enabled: true
+      path: /h2
