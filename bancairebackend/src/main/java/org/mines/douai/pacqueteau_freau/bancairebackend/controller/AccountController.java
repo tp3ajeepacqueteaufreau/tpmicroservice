@@ -2,7 +2,7 @@ package org.mines.douai.pacqueteau_freau.bancairebackend.controller;
 
 import org.mines.douai.pacqueteau_freau.bancairebackend.DTO.*;
 import org.mines.douai.pacqueteau_freau.bancairebackend.service.AccountService;
-import org.mines.douai.pacqueteau_freau.bancairebackend.service.IbanServiceProxy;
+import org.mines.douai.pacqueteau_freau.bancairebackend.service.IbanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +14,14 @@ public class AccountController {
     
     private final AccountService accountService;
     
-    private final IbanServiceProxy ibanServiceProxy;
+    private final IbanService ibanService;
     
     @Autowired
-    public AccountController(AccountService accountService, IbanServiceProxy ibanServiceProxy) {
+    public AccountController(AccountService accountService, IbanService ibanService) {
         this.accountService = accountService;
-        this.ibanServiceProxy = ibanServiceProxy;
+        this.ibanService = ibanService;
     }
+    
     
     @GetMapping("/accounts")
     public List<Account> getAllAccount() {
@@ -41,7 +42,7 @@ public class AccountController {
     @PostMapping("/account")
     public Account newAccount(@RequestBody AccountCreationRequest accountCreationRequest) {
         IbanRequestDto ibanRequestDto = new IbanRequestDto(accountCreationRequest.getIban());
-        IbanAnswerDTO ibanAnswerDTO = this.ibanServiceProxy.checkIban(ibanRequestDto);
+        IbanAnswerDTO ibanAnswerDTO = this.ibanService.checkIban(ibanRequestDto);
         
         if (ibanAnswerDTO.isOk()) {
             Account account = new Account(accountCreationRequest);

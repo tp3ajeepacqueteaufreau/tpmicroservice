@@ -3,6 +3,7 @@
   <component name="Encoding" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$/bancairebackend" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bancairefrontend" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eureka" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ibanbackend" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ibanfrontend" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/waitingqueue" charset="UTF-8" />

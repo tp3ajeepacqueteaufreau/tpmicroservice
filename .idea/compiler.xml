@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bancairebackend" />
         <module name="bancairefrontend" />
+        <module name="eureka" />
         <module name="ibanbackend" />
         <module name="ibanfrontend" />
         <module name="waitingqueue" />
@@ -16,8 +17,10 @@
     <bytecodeTargetLevel>
       <module name="bancairebackend" target="11" />
       <module name="bancairefrontend" target="11" />
+      <module name="eureka" target="11" />
       <module name="ibanbackend" target="11" />
       <module name="ibanfrontend" target="11" />
+      <module name="spring-cloud-starter-openfeign" target="11" />
       <module name="waitingqueue" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -25,8 +28,10 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bancairebackend" options="-parameters" />
       <module name="bancairefrontend" options="-parameters" />
+      <module name="eureka" options="-parameters" />
       <module name="ibanbackend" options="-parameters" />
       <module name="ibanfrontend" options="-parameters" />
+      <module name="spring-cloud-starter-openfeign" options="-parameters" />
       <module name="waitingqueue" options="-parameters" />
     </option>
   </component>
