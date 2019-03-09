@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bancairebackend" />
         <module name="bancairefrontend" />
+        <module name="eureka" />
         <module name="ibanbackend" />
         <module name="ibanfrontend" />
         <module name="waitingqueue" />
@@ -16,7 +17,7 @@
     <bytecodeTargetLevel>
       <module name="bancairebackend" target="11" />
       <module name="bancairefrontend" target="11" />
-      <module name="eureka" target="11" />
+      <module name="eureka" target="8" />
       <module name="ibanbackend" target="11" />
       <module name="ibanfrontend" target="11" />
       <module name="spring-cloud-starter-openfeign" target="11" />
