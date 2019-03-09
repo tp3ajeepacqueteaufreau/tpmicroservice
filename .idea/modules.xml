@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bancairebackend/bancairebackend.iml" filepath="$PROJECT_DIR$/bancairebackend/bancairebackend.iml" />
       <module fileurl="file://$PROJECT_DIR$/bancairefrontend/bancairefrontend.iml" filepath="$PROJECT_DIR$/bancairefrontend/bancairefrontend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/ibanbackend/ibanbackend.iml" filepath="$PROJECT_DIR$/ibanbackend/ibanbackend.iml" />
       <module fileurl="file://$PROJECT_DIR$/ibanfrontend/ibanfrontend.iml" filepath="$PROJECT_DIR$/ibanfrontend/ibanfrontend.iml" />
       <module fileurl="file://$PROJECT_DIR$/waitingqueue/waitingqueue.iml" filepath="$PROJECT_DIR$/waitingqueue/waitingqueue.iml" />

@@ -28,6 +28,6 @@ public class AccountService {
     }
     
     public void deleteAccount(Long id) {
-        this.accountRepository.delete(this.accountRepository.findById(id));
+        this.accountRepository.delete(this.accountRepository.findById(id).orElse(null));
     }
 }

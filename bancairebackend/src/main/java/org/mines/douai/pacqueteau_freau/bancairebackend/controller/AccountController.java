@@ -12,14 +12,13 @@ import java.util.List;
 @Component
 public class AccountController {
     
-    private final AccountService accountService;
-    
-    private final IbanService ibanService;
+    @Autowired
+    private AccountService accountService;
     
     @Autowired
-    public AccountController(AccountService accountService, IbanService ibanService) {
-        this.accountService = accountService;
-        this.ibanService = ibanService;
+    private IbanService ibanService;
+    
+    public AccountController() {
     }
     
     

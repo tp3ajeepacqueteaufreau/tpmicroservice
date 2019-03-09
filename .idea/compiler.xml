@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bancairebackend" />
         <module name="bancairefrontend" />
-        <module name="eureka" />
         <module name="ibanbackend" />
         <module name="ibanfrontend" />
         <module name="waitingqueue" />

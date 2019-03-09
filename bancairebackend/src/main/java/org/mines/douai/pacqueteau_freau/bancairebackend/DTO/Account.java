@@ -2,24 +2,27 @@ package org.mines.douai.pacqueteau_freau.bancairebackend.DTO;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "account")
 public class Account {
     
     @Id
+    @Column(name = "accountId")
     private Long id;
     
+    @Column(name = "owner")
     private String owner;
     
+    @Column(name = "iban")
     private String iban;
     
     @OneToMany
     private List<TransactionBancaire> transactions;
     
+    @Column(name = "amount")
     private float montant;
     
     public Account() {
