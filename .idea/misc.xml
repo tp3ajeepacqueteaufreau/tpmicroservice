@@ -5,11 +5,11 @@
       <list>
         <option value="$PROJECT_DIR$/ibanbackend/pom.xml" />
         <option value="$PROJECT_DIR$/ibanfrontend/pom.xml" />
-        <option value="$PROJECT_DIR$/bancairebackend/pom.xml" />
         <option value="$PROJECT_DIR$/bancairefrontend/pom.xml" />
         <option value="$PROJECT_DIR$/waitingqueue/pom.xml" />
         <option value="$PROJECT_DIR$/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/bancairebackend/pom.xml" />
       </list>
     </option>
   </component>

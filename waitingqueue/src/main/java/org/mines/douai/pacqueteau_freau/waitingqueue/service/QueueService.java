@@ -27,7 +27,8 @@ public class QueueService {
     @Async("threadPoolTaskExecutor")
     public void updateService() throws InterruptedException {
         logger.info("Calling async message");
-        
+    
+    
     }
     
     public String addInQueue(QueueDTO queueDTO) {

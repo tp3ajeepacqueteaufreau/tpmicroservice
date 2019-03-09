@@ -15,7 +15,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bancairebackend" target="1.8" />
+      <module name="bancairebackend" target="11" />
       <module name="bancairefrontend" target="1.8" />
       <module name="demo" target="1.8" />
       <module name="eureka" target="8" />
