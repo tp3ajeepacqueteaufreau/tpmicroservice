@@ -1,6 +1,9 @@
 package org.mines.douai.pacqueteau_freau.waitingqueue.service;
 
 import org.mines.douai.pacqueteau_freau.waitingqueue.dto.QueueDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +15,8 @@ import java.util.Map;
 @Component
 public class QueueService {
     
+    private static final Logger logger = LoggerFactory.getLogger(QueueService.class);
+    
     private Map<String, List<String>> queues;
     
     @PostConstruct
@@ -19,6 +24,11 @@ public class QueueService {
         this.queues = new HashMap<>();
     }
     
+    @Async("threadPoolTaskExecutor")
+    public void updateService() throws InterruptedException {
+        logger.info("Calling async message");
+        
+    }
     
     public String addInQueue(QueueDTO queueDTO) {
         String ret = null;
@@ -32,13 +42,13 @@ public class QueueService {
     
     
     private List<String> getList(QueueDTO queueDTO) {
-        return this.queues.getOrDefault(queueDTO.getId(), new ArrayList<>());
+        return this.queues.getOrDefault(queueDTO.getDistantService(), new ArrayList<>());
     }
     
     public String getInQueue(QueueDTO queueDTO) {
         List<String> el = this.getList(queueDTO);
-        el.add(el.size(), queueDTO.action);
-        this.queues.put(queueDTO.getId(), el);
+        el.add(el.size(), queueDTO.payload);
+        this.queues.put(queueDTO.getDistantService(), el);
         return "OK";
     }
 }
