@@ -2,7 +2,142 @@
 <head>
     <script src="js/jq.js" type="text/javascript"></script>
     <script>
-        function openCity(evt, cityName) {
+
+
+        function onCreateAccount() {
+
+            // PREPARE FORM DATA
+            var formData = {
+                owner: $("#createOwner").val(),
+                iban: $("#createIban").val(),
+                amount: $("#createMontant").val(),
+            }
+
+            console.log(JSON.stringify(formData));
+
+            // DO POST
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "http://localhost:8083/account",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success: function (result) {
+                    $("#resultOfCreation").html("<p style='background-color:#7FFFB0; color:white; padding:20px 20px 20px 20px'>" +
+                        "Account is created</p>");
+                    console.log(result);
+                },
+                error: function (e) {
+                    alert("Error!")
+                    console.log("ERROR: ", e);
+                }
+            });
+
+            // Reset FormData after Posting
+            $("#createOwner").val("");
+            $("#createIban").val("");
+            $("#createMontant").val("");
+
+        }
+
+        function transferMoney() {
+            var formData = {
+                accountFrom: $("#selectTransferFrom").val(),
+                accountTo: $("#selectTransferTo").val(),
+                montant: $("#transferMontant").val(),
+            }
+            // DO POST
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "http://localhost:8083/transaction",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success: function (result) {
+                    $("#resultOfCreation").html("<p style='background-color:#7FFFB0; color:white; padding:20px 20px 20px 20px'>" +
+                        "Account is created</p>");
+                    console.log(result);
+                },
+                error: function (e) {
+                    alert("Error!")
+                    console.log("ERROR: ", e);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#createAccount").submit(function (event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                onCreateAccount();
+            });
+
+            $("#viewAccount").submit(function (event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                updateShowAccount();
+            });
+
+            $("#transferMoney").submit(function (event) {
+                // Prevent the form from submitting via the browser.
+                event.preventDefault();
+                transferMoney();
+            });
+
+            $.ajax({
+                url: 'http://localhost:8083/account',
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(JSON.stringify(response));
+                    var len = response.length;
+                    $("#selectShowAccount").empty();
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['accountId'];
+                        var name = response[i]['iban'];
+                        $("#selectShowAccount").append("<option value='" + id + "'>" + name + "</option>");
+                        $("#selectTransferFrom").append("<option value='" + id + "'>" + name + "</option>");
+                        $("#selectTransferTo").append("<option value='" + id + "'>" + name + "</option>");
+                    }
+                }
+            });
+
+        });
+
+        function updateShowAccount() {
+            var id = $("#selectShowAccount").val();
+            console.log(id);
+            $.ajax({
+                url: 'http://localhost:8083/account/' + id,
+                type: 'get',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(JSON.stringify(response));
+                    $("#showOwner").html(response.owner);
+                    $("#showIban").html(response.iban);
+                    $("#showMontant").html(response.amount);
+
+                    $.ajax({
+                        url: 'http://localhost:8083/account/' + id + '/transaction',
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log(JSON.stringify(response));
+                            var len = response.length;
+                            $("#showTransaction tbody").empty();
+                            for (var i = 0; i < len; i++) {
+                                var idfrom = response[i]['accountFrom'];
+                                var idto = response[i]['accountTo'];
+                                var amount = response[i]['montant'];
+                                $("#showTransaction tbody").append("<tr><td>" + idfrom + "</td><td>" + idto + "</td><td>" + amount + "</td></tr>");
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        function openTab(evt, tab) {
             // Declare all variables
             var i, tabcontent, tablinks;
 
@@ -19,7 +154,7 @@
             }
 
             // Show the current tab, and add an "active" class to the button that opened the tab
-            document.getElementById(cityName).style.display = "block";
+            document.getElementById(tab).style.display = "block";
             evt.currentTarget.className += " active";
         }
     </script>
@@ -59,30 +194,90 @@
             border: 1px solid #ccc;
             border-top: none;
         }
+
+        table,
+        td {
+            border: 1px solid #333;
+        }
+
+        thead,
+        tfoot {
+            background-color: #333;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
 <!-- Tab links -->
 <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'CreerUnCompte')">Créer un compte</button>
-    <button class="tablinks" onclick="openCity(event, 'VoirUnCompte')">Voir un compte</button>
-    <button class="tablinks" onclick="openCity(event, 'EffectuerUnVirement')">Effectuer un virement</button>
+    <button class="tablinks" onclick="openTab(event, 'CreerUnCompte')">Créer un compte</button>
+    <button class="tablinks" onclick="openTab(event, 'VoirUnCompte')">Voir un compte</button>
+    <button class="tablinks" onclick="openTab(event, 'EffectuerUnVirement')">Effectuer un virement</button>
 </div>
 
 <!-- Tab content -->
 <div class="tabcontent" id="CreerUnCompte">
     <h3>Créer un nouveau compte</h3>
-    <p>London is the capital city of England.</p>
+    <form id="createAccount" method="post">
+        <label name="ownerLabel">Nom du propriétaire: </label>
+        <input id="createOwner" name="owner" type="text"/>
+        <br>
+        <label name="ibanLabel">IBAN: </label>
+        <input id="createIban" name="iban" type="text"/>
+        <br>
+        <label name="montantLabel">Montant: </label>
+        <input id="createMontant" name="montant" type="text"/>
+        <br>
+        <input type="submit"/>
+    </form>
+    <br>
+    <p id="resultOfCreation"></p>
 </div>
 
 <div class="tabcontent" id="VoirUnCompte">
     <h3>Voir un compte</h3>
-    <p>Paris is the capital of France.</p>
+    <label name="lblForShowAccount">Compte: </label>
+    <form id="viewAccount">
+        <select id="selectShowAccount">
+            <!--List accounts-->
+        </select>
+        <input type="submit"/>
+    </form>
+    <div id="showAccount">
+        <p>Propriétaire: </p>
+        <p id="showOwner"></p><br>
+        <p>IBAN: </p>
+        <p id="showIban"></p><br>
+        <p>Montant: </p>
+        <p id="showMontant"></p><br>
+        <table id="showTransaction">
+            <thead>
+            <th colspan="1">Compte de départ</th>
+            <th colspan="1">Compte d'arriver</th>
+            <th colspan="1">Montant</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <br>
 </div>
 
 <div class="tabcontent" id="EffectuerUnVirement">
-    <h3>Effectuer un nouveau virement</h3>
-    <p>Tokyo is the capital of Japan.</p>
+    <form id="transferMoney" method="post">
+        <label name="lblSelectTransferFrom">Compte à débitter: </label><select id="selectTransferFrom">
+        <!--List account-->
+    </select>
+        <br>
+        <label name="lblSelectTransferTo">Compte à accréditer: </label><select id="selectTransferTo">
+        <!--List account-->
+    </select>
+        <br>
+        <label name="montant">Montant à tranférer: </label>
+        <input id="transferMontant" type="number"/>
+        <input type="submit"/>
+    </form>
 </div>
 </body>
 </html>

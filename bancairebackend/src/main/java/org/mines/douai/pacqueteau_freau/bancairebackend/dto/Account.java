@@ -50,4 +50,14 @@ public class Account implements Serializable {
     public void setIban(String iban) {
         this.iban = iban;
     }
+    
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", owner='" + owner + '\'' +
+                ", amount=" + amount +
+                ", iban='" + iban + '\'' +
+                '}';
+    }
 }
